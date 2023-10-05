@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple-slider</title>
+    <script type="module" src="/main.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <pre><code>/* docs (with defaults) */
+export default ({
+  el, // parent element
+  item = 'li', // selector of items
+  loop = false, // infinite carousel
+  autoplay = false, // moves items on every raf
+  pausable = true, // dont stop autoplay on hover
+  snap = false, // makes items move in jumps
+  align, // undefined || 'center' -> centers items when snap is enabled
+  lerp: lerpAmount = [0.1, 0.1], // easing of scroll [mobile, desktop]
+  onChange = () => {}, // callback when a new item becomes 'active'
+  onUpdate = () => {}, // callback on every raf
+})
+
+/* callbacks are half implemented 🙃 */
+    </code></pre>
+
+    <h1>Examples:</h1>
+
+    <pre><code>/* Default */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.default'),
+})
+    </code></pre>
+    <ul class="default">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+
+    <pre><code>/* Looped */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.looped'),
+  loop: true
+})
+    </code></pre>
+    <ul class="looped">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+        <pre><code>/* Autoplay */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.autoplay'),
+  loop: true,
+  autoplay: true
+})
+    </code></pre>
+    <ul class="autoplay">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+    <pre><code>/* Speed */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.speed'),
+  loop: true,
+  autoplay: 5,
+})
+    </code></pre>
+    <ul class="speed">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+    <pre><code>/* Non-pausable */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.no-pause'),
+  loop: true,
+  autoplay: true,
+  pausable: false
+})
+    </code></pre>
+    <ul class="no-pause">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+    <pre><code>/* Snap */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.snap'),
+  loop: true,
+  autoplay: 5,
+  pausable: false,
+  snap: true
+})
+    </code></pre>
+    <ul class="snap">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+    <pre><code>/* Center */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.center'),
+  loop: true,
+  autoplay: 5,
+  pausable: false,
+  snap: true,
+  align: 'center'
+})
+    </code></pre>
+    <ul class="center">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+
+    <pre><code>/* Callback */
+import dragScroll from './drag-scroll'
+
+dragScroll({
+  el: document.querySelector('.callback'),
+  loop: true,
+  autoplay: true,
+  onUpdate: (state) => {
+    const output = document.querySelector('output')
+
+    output.textContent = state.current
+  }
+})
+    </code></pre>
+    <ul class="callback">
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+      <li><img src="image.jpg" /></li>
+    </ul>
+    <output>0</output>
+  </body>
+</html>
